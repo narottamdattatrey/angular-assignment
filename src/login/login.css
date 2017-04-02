@@ -1,0 +1,20 @@
+md-input-container {
+  margin: 5px  !important;
+  /*padding: 2px 2px 2px !important;*/
+}
+md-input-container .md-input {
+  font-size: 12px;
+}
+.login-card{
+  margin-top: 10%;
+  max-width: 550px !important;
+}
+.login-card md-card-content{
+  padding-top: 24px;
+}
+.secondary-color{
+  background-color: aquamarine !important;
+}
+.align-center{
+  text-align: center;
+}

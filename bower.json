@@ -1,0 +1,24 @@
+{
+  "name": "angular-assignment",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "narottam"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dattatrey93/angular-assignment",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.4",
+    "angular-sanitize": "^1.6.4"
+  },
+  "dependencies": {
+    "angular-material": "^1.1.3"
+  }
+}

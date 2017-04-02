@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" href="login/login.css">
+    <link rel="stylesheet" href="external_library/node/videogular.min.css">
+    <link rel="stylesheet" href="external_library/bower/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.0.2/mediaelementplayer.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.0.2/mediaelement-and-player.js"></script>
+</head>
+
+<body>
+    <div id="toolbarContainer" layout="column" ng-controller="HomeCtrl as ctrl" ng-cloak>
+        <md-content>
+            <md-toolbar md-scroll-shrink>
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Library">
+                        <md-icon class="material-icons">video_library</md-icon>
+                    </md-button>
+                    <h2><span>Video LIbrary</span></h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Account">
+                        <md-icon class="material-icons">account_box</md-icon>
+                    </md-button>
+                    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+
+                    <div><span>{{ctrl.userName}}</span>
+                        <span>Signout</span>
+                        <!-- <md-menu md-offset="0 -5">
+                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="ctrl.openMenu($mdMenu, $event)">
+                                <md-icon class="material-icons">logout</md-icon>
+                            </md-button>
+                            <md-menu-content width="3">
+                                <md-menu-item>
+                                    <md-button ng-click="ctrl.logout()">
+                                      <span md-menu-align-target></span>Signout</md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu> -->
+                    </div>
+                </div>
+            </md-toolbar>
+        </md-content>
+    </div>
+
+    <div layout="row" layout-xs="column" layout-gt-xs="column" layout-md="row" layout-gt-md="row" layout-align="center center">
+        <!-- <div ng-include="'login/login.html'"></div> -->
+        <div layout-align="center center" layout="row" ng-controller="HomeCtrl as ctrl">
+            <md-card flex="60" layout="row" class="login-card">
+                <md-card-content flex="50" class="secondary-color" layout-align="center center">
+                    <h4 class="align-center">MyTube</h4>
+                    <p class="align-center">For entertenment purpose<br>please login
+                        <md-icon class="material-icons">vpn_key</md-icon>
+                    </p>
+                    <!-- <md-button ng-click="ctrl.signIN()">Google signin</md-button> -->
+                </md-card-content>
+                <md-card-content layout="column" flex="50">
+                    <md-input-container md-no-flat>
+                        <label>Username</label>
+                        <md-icon class="material-icons">email</md-icon>
+                        <input type="email" placeholder="Enter emailId here..">
+                    </md-input-container>
+                    <md-input-container md-no-float>
+                        <label>Password</label>
+                        <md-icon class="material-icons">lock</md-icon>
+                        <input type="email" placeholder="Enter your password here..">
+                    </md-input-container>
+                    <md-button class="secondary-color" ng-click="ctrl.signIN()" aria-label="google">
+                        <md-icon class="material-icons"></md-icon>sign in</md-button>
+                </md-card-content>
+            </md-card>
+        </div>
+        <input type="text" ng-model="myurl" />
+
+        <!-- media player -->
+        <div ng-controller="HomeCtrl as ctrl" class="videogular-container" flex="75" flex-gt-md="75" flex-lg="75" flex-md="75" flex-xs="100" flex-gt-xs="100">
+            <!-- To start using Videogular, just create a videogular tag like this one: -->
+            <!-- vg-media tag will create a video with the source and tracks  -->
+
+
+
+
+            <!-- <video width="640" height="360" id="player1" preload="none">
+    <source type="video/youtube" src="https://www.youtube.com/watch?v=Jyst8oIHOAY" />
+</video>
+
+            <script>
+                var player = new MediaElementPlayer('#player1');
+            </script> -->
+            <!-- <video controls="controls"
+       class="video-stream"
+       x-webkit-airplay="allow"
+       data-youtube-id="N9oxmRT2YWw"
+       src="https://www.youtube.com/watch?v=z3HD_1qA8Jc"></video>
+            <iframe id="player" type="text/html" width="640" height="390" src="{{myurl}}"
+          frameborder="0"></iframe> -->
+            <!-- <videogular vg-player-ready="onPlayerReady" class="main-player" vg-theme="config.theme.url" vg-autoplay="config.autoPlay">
+                    <vg-media vg-src="config.sources" vg-youtube="rel=1;showinfo=1"></vg-media>
+
+                    <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime">
+                        <vg-play-pause-button></vg-play-pause-button>
+                        <vg-timedisplay>{{ currentTime | date:'mm:ss' }}</vg-timedisplay>
+                        <vg-scrubBar>
+                            <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
+                        </vg-scrubBar>
+                        <vg-timedisplay>{{ timeLeft | date:'mm:ss' }}</vg-timedisplay>
+                        <vg-volume>
+                            <vg-mutebutton></vg-mutebutton>
+                            <vg-volumebar></vg-volumebar>
+                        </vg-volume>
+                        <vg-fullscreenButton></vg-fullscreenButton>
+                    </vg-controls>
+
+                    <vg-poster-image vg-url='config.plugins.poster.url'></vg-poster-image>
+                    <vg-buffering></vg-buffering>
+                    <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
+
+                    <vg-poster-image vg-url='config.plugins.poster.url'></vg-poster-image>
+                    <vg-buffering></vg-buffering>
+                    <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
+                  </videogular> -->
+        </div>
+
+        <!-- list view -->
+        <div flex="25" flex-md="25" flex-xs="100" flex-gt-md="25" flex-gt-xs="100" ng-if="">
+            <md-card>
+                <md-content>
+                    <md-list class="library-content-list">
+                        <md-list-item class="md-2-line list-view-library">
+                            <md-icon class="material-icons">ondemand_video</md-icon>
+                            <p>tere sang jo kati raate</p>
+                            <md-divider ng-if="!$last"></md-divider>
+                            <!-- <md-divider></md-divider> -->
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-card>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAFRJcuw8YNrQhAnLziuuv60EEIV3dip4Y",
+            authDomain: "assignment-ada5d.firebaseapp.com",
+            databaseURL: "https://assignment-ada5d.firebaseio.com",
+            projectId: "assignment-ada5d",
+            storageBucket: "assignment-ada5d.appspot.com",
+            messagingSenderId: "490913970798"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <div id="player"></div>
+
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: {{ctrl.myid}},
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        var done = false;
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+            }
+        }
+
+        function stopVideo() {
+            player.stopVideo();
+        }
+    </script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <script src="external_library/bower/angular.js"></script>
+    <script src="external_library/bower/angular-aria.js"></script>
+    <script src="external_library/bower/angular-animate.js"></script>
+    <script src="external_library/bower/angular-messages.js"></script>
+    <script src="external_library/bower/angular-material.js"></script>
+    <script src="external_library/bower/angular-sanitize.js"></script>
+
+    <script src="app.js"></script>
+    <script src="login/login_controller.js"></script>
+</body>
+
+</html>
