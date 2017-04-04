@@ -4,15 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>youtube embed library</title>
 
     <link rel="stylesheet" href="login/login.css">
     <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.0.2/mediaelementplayer.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.0.2/mediaelement-and-player.js"></script>
 </head>
 
 <body>
@@ -51,14 +48,13 @@
 
     <div layout="row" layout-xs="column" layout-gt-xs="column" layout-md="row" layout-gt-md="row" layout-align="center center">
         <!-- <div ng-include="'login/login.html'"></div> -->
-        <div layout-align="center center" layout="row" ng-controller="HomeCtrl as ctrl">
+        <!-- <div layout-align="center center" layout="row" ng-controller="HomeCtrl as ctrl">
             <md-card flex="60" layout="row" class="login-card">
                 <md-card-content flex="50" class="secondary-color" layout-align="center center">
                     <h4 class="align-center">MyTube</h4>
                     <p class="align-center">For entertenment purpose<br>please login
                         <md-icon class="material-icons">vpn_key</md-icon>
                     </p>
-                    <!-- <md-button ng-click="ctrl.signIN()">Google signin</md-button> -->
                 </md-card-content>
                 <md-card-content layout="column" flex="50">
                     <md-input-container md-no-flat>
@@ -75,57 +71,19 @@
                         <md-icon class="material-icons"></md-icon>sign in</md-button>
                 </md-card-content>
             </md-card>
+        </div> -->
+        <!-- <input type="text" ng-model="myurl" /> -->
+        <div ng-controller="HomeCtrl as ctrl" ng-init="run()">
+          <input type="text" ng-model="myid" />
+          <md-button ng-click="f2()">button</md-button>
+            <div id="player"></div>
+
         </div>
-        <input type="text" ng-model="myurl" />
 
         <!-- media player -->
-        <div ng-controller="HomeCtrl as ctrl" class="videogular-container" flex="75" flex-gt-md="75" flex-lg="75" flex-md="75" flex-xs="100" flex-gt-xs="100">
-            <!-- To start using Videogular, just create a videogular tag like this one: -->
-            <!-- vg-media tag will create a video with the source and tracks  -->
+        <!-- <div ng-controller="HomeCtrl as ctrl" class="videogular-container" flex="75" flex-gt-md="75" flex-lg="75" flex-md="75" flex-xs="100" flex-gt-xs="100">
 
-
-
-
-            <!-- <video width="640" height="360" id="player1" preload="none">
-    <source type="video/youtube" src="https://www.youtube.com/watch?v=Jyst8oIHOAY" />
-</video>
-
-            <script>
-                var player = new MediaElementPlayer('#player1');
-            </script> -->
-            <!-- <video controls="controls"
-       class="video-stream"
-       x-webkit-airplay="allow"
-       data-youtube-id="N9oxmRT2YWw"
-       src="https://www.youtube.com/watch?v=z3HD_1qA8Jc"></video>
-            <iframe id="player" type="text/html" width="640" height="390" src="{{myurl}}"
-          frameborder="0"></iframe> -->
-            <!-- <videogular vg-player-ready="onPlayerReady" class="main-player" vg-theme="config.theme.url" vg-autoplay="config.autoPlay">
-                    <vg-media vg-src="config.sources" vg-youtube="rel=1;showinfo=1"></vg-media>
-
-                    <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime">
-                        <vg-play-pause-button></vg-play-pause-button>
-                        <vg-timedisplay>{{ currentTime | date:'mm:ss' }}</vg-timedisplay>
-                        <vg-scrubBar>
-                            <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
-                        </vg-scrubBar>
-                        <vg-timedisplay>{{ timeLeft | date:'mm:ss' }}</vg-timedisplay>
-                        <vg-volume>
-                            <vg-mutebutton></vg-mutebutton>
-                            <vg-volumebar></vg-volumebar>
-                        </vg-volume>
-                        <vg-fullscreenButton></vg-fullscreenButton>
-                    </vg-controls>
-
-                    <vg-poster-image vg-url='config.plugins.poster.url'></vg-poster-image>
-                    <vg-buffering></vg-buffering>
-                    <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
-
-                    <vg-poster-image vg-url='config.plugins.poster.url'></vg-poster-image>
-                    <vg-buffering></vg-buffering>
-                    <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
-                  </videogular> -->
-        </div>
+        </div> -->
 
         <!-- list view -->
         <div flex="25" flex-md="25" flex-xs="100" flex-gt-md="25" flex-gt-xs="100" ng-if="">
@@ -136,7 +94,6 @@
                             <md-icon class="material-icons">ondemand_video</md-icon>
                             <p>tere sang jo kati raate</p>
                             <md-divider ng-if="!$last"></md-divider>
-                            <!-- <md-divider></md-divider> -->
                         </md-list-item>
                     </md-list>
                 </md-content>
@@ -161,8 +118,8 @@
         };
         firebase.initializeApp(config);
     </script>
-
-    <div id="player"></div>
+  
+  //youtube initialization
 
     <script>
         // 2. This code loads the IFrame Player API code asynchronously.
@@ -219,6 +176,60 @@
 
     <script src="app.js"></script>
     <script src="login/login_controller.js"></script>
+    <script async>
+        // setTimeout(function () {
+          console.log(window.myid +" "+new Date().getMilliseconds());
+          var id = window.myid;
+          // ctrl.myid = ctrl.myid ? ctrl.myid : '';
+          // console.log(ctrl.myid);
+          // 2. This code loads the IFrame Player API code asynchronously.
+          var tag = document.createElement('script');
+
+          tag.src = "https://www.youtube.com/iframe_api";
+          var firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+          // 3. This function creates an <iframe> (and YouTube player)
+          //    after the API code downloads.
+          var player;
+
+          function onYouTubeIframeAPIReady() {
+              player = new YT.Player('player', {
+                  height: '390',
+                  width: '640',
+                  videoId: window.myid,
+                  events: {
+                      'onReady': onPlayerReady,
+                      'onStateChange': onPlayerStateChange
+                  }
+              });
+              console.log("YT player"+ new Date().getMilliseconds()+"Id: "+window.myid);
+          }
+          // onYouTubeIframeAPIReady();
+
+          // 4. The API will call this function when the video player is ready.
+          function onPlayerReady(event) {
+              event.target.playVideo();
+          }
+
+          // 5. The API calls this function when the player's state changes.
+          //    The function indicates that when playing a video (state=1),
+          //    the player should play for six seconds and then stop.
+          var done = false;
+
+          function onPlayerStateChange(event) {
+              if (event.data == YT.PlayerState.PLAYING && !done) {
+                  setTimeout(stopVideo, 6000);
+                  done = true;
+              }
+          }
+
+          function stopVideo() {
+              player.stopVideo();
+          }
+        // }, 100);
+    </script>
+
 </body>
 
 </html>
